@@ -28,7 +28,7 @@
   PORT=5000
   MONGO_URL=mongodb://localhost:27017/mern-auth
   JWT_SECRET=secret_jwt_key
-  CLIENT_URL=http://localhost:3000
+  CLIENT_URL=http://localhost:5173
   API_URL=http://localhost:5000
   EMAIL_USER=ton_email@gmail.com
   EMAIL_PASS=mot_de_passe_app
