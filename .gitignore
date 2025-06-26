@@ -1,10 +1,10 @@
 # Frontend
-client/node_modules/
-client/dist/
-client/.env
+frontend/node_modules/
+frontend/dist/
+frontend/.env
 
 # Backend
-api/node_modules/
-api/.env
+backend/node_modules/
+backend/.env
 
 
