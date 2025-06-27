@@ -9,7 +9,7 @@ import verifyPW from "../utils/verifyPW.js"
 
 export const register = async (req, res) => {
     const { username, email, password } = req.body
-    console.log(username,email,password)
+    console.log(username, email, password)
     try {
         const existingUser = await User.findOne({ email })
 
@@ -74,10 +74,47 @@ export const login = async (req, res) => {
             httpOnly: true,
             maxAge: 24 * 3600 * 1000
         })
-        res.status(200).json({ message: "Vous êtes authentifé" })
+        res.status(200).json({ message: "Vous êtes authentifié" })
     } catch (err) {
         res.status(500).json({ message: "Internal Server" })
     }
+}
+
+export const logout = (req, res) => {
+    res.clearCookie('token')
+    res.status(200).json({ message: "Vous êtes déconnecté" })
+}
+
+export const forgotPassword = async (req, res) => {
+    const { email } = req.body
+    const user = await User.findOne({ email })
+    if (!user) return res.status(400).json({ message: "" })
+    const token = v4()
+    user.token = token
+    await user.save()
+    const link = `${process.env.CLIENT_URL}/reset-password/${token}`
+    const html = `
+        <p>Bonjour ${user.username}. Ckiquez sur le lien pour réinitialiser votre mot de passe
+        <a href="${link}">Réinitialisation du MDP</a>
+        </p>
+    `
+
+    mail(email, 'Réinitialisation du mot de passe', html)
+    res.status(200).json({message:'Réinitialiser MDP'})
+}
+
+export const resetPassword = async (req,res) => {
+    const {password} = req.body
+    const {token} = req.params
+
+    const user = await User.findOne({token})
+    if (!user) return res.status(400).json({ message: "identifiants invalides" }) 
+    if(!verifyPW(password)) return res.status(400).json({ message: 'Le mot de passe doit centenir A a $ 9 ' })
+    const hashedPassword = await bcrypt.hash(password, 10)
+    user.password = hashedPassword
+    user.token = ""
+    await user.save()
+    res.status(200).json({message:'MDP a été modifié avec succès!'})
 }
 
 
