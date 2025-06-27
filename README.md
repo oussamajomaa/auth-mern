@@ -84,7 +84,7 @@
   VITE_API_URL=http://localhost:5000/api
 ```
 
-### 🗂️ Exemple d'import une variavle env
+### 🗂️ Exemple d'import une variable env
 ```js
   const API_URL = import.meta.env.VITE_API_URL
 ```
