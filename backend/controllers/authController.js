@@ -9,7 +9,7 @@ import verifyPW from "../utils/verifyPW.js"
 
 export const register = async (req, res) => {
     const { username, email, password } = req.body
-
+    console.log(username,email,password)
     try {
         const existingUser = await User.findOne({ email })
 
@@ -56,6 +56,7 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body
         const user = await User.findOne({ email })
+        console.log(user, email)
         if (!user) return res.status(400).json({ message: "identifiants invalides" })
 
         const isMatch = await bcrypt.compare(password, user.password)

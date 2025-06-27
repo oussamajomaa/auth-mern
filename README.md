@@ -11,7 +11,7 @@
 
 ### 📦 Installer les dépendances nécessaires
 ```bash
-  npm install express mongoose bcryptjs jsonwebtoken cookie-parser nodemailer dotenv cors
+  npm install express mongoose bcryptjs jsonwebtoken cookie-parser nodemailer dotenv cors uuid
 ```
 
 ### 📁 Créer la structure
@@ -43,14 +43,48 @@
   npm install
 ```
 
-### 🎨 Installer TailwindCSS et DaisyUI
+### 🎨 Installer TailwindCSS & Daisyui
 ```bash
-  npm install -D tailwindcss
-  npx tailwindcss init -p
-  npm install daisyui
+  npm install -D tailwindcss @tailwindcss/vite
+  npm install -D daisyui@latest
+```
+
+### ⚙️ Configure (vite.config.ts)
+```ts
+  import { defineConfig } from 'vite'
+  import react from '@vitejs/plugin-react-swc'
+  import tailwindcss from '@tailwindcss/vite'
+
+  export default defineConfig({
+    plugins: [
+      react(),
+      tailwindcss()
+    ]
+  })
 ```
 
 
 
+### 📦 Import Tailwind & Daisyui css dans app.css ou index.css
+```css
+  @import "tailwindcss";
+  @plugin "daisyui";
+```
 
 
+### 📦 Installer react-router-dom & axios
+
+```bash
+  npm install react-router-dom
+  npm install axios
+```
+
+### 🗂️ Créer le fichier .env
+```bash
+  VITE_API_URL=http://localhost:5000/api
+```
+
+### 🗂️ Exemple d'import une variavle env
+```js
+  const API_URL = import.meta.env.VITE_API_URL
+```
