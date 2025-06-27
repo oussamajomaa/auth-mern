@@ -72,11 +72,12 @@
 ```
 
 
-### 📦 Installer react-router-dom & axios
+### 📦 Installer React Router & Axios & React Icones
 
 ```bash
   npm install react-router-dom
   npm install axios
+  npm install react-icons
 ```
 
 ### 🗂️ Créer le fichier .env
